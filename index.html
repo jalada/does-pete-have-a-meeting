@@ -14,7 +14,6 @@
 
 #response p {
   margin: 10px;
-  text-transform: uppercase;
 }
 
 #response small {
@@ -34,24 +33,30 @@
 // github.com/ded/domready
 !function(a,b){typeof define=="function"?define(b):typeof module!="undefined"?module.exports=b():this[a]=this.domReady=b()}("domready",function(a){function l(a){k=1;while(a=b.shift())a()}var b=[],c,d=!1,e=document,f=e.documentElement,g=f.doScroll,h="DOMContentLoaded",i="addEventListener",j="onreadystatechange",k=/^loade|c/.test(e.readyState);e[i]&&e[i](h,c=function(){e.removeEventListener(h,c,d),l()},d),g&&e.attachEvent(j,c=function(){/^c/.test(e.readyState)&&(e.detachEvent(j,c),l())});return a=g?function(c){self!=top?k?c():b.push(c):function(){try{f.doScroll("left")}catch(b){return setTimeout(function(){a(c)},50)}c()}()}:function(a){k?a():b.push(a)}});
 
+var chooser = function() {
+  var now = new Date(),
+      template,
+      r = document.getElementById("response");
+
+  if ([5,6].indexOf(now.getDay()) != -1) {
+    template = ich.weekend;
+  } else if ([0,1,2,3,4,5,6,7,8,18,19,20,21,22,23].indexOf(now.getHours()) != -1) {
+    template = ich.notWorking;
+  } else if (([12,13].indexOf(now.getHours()) != -1) && (now.getDay() == 4)) {
+    template = ich.market;
+  } else if ([9,10].indexOf(now.getHours()) != -1) {
+    template = ich.tooEarly;
+  } else {
+    template = ich.yes;
+  }
+
+  r.innerHTML = template();
+
+}
+
 domReady(function() {
-	var now = new Date(),
-	    template;
-
-	if ([5,6].indexOf(now.getDay()) != -1) {
-		template = ich.weekend;
-	} else if ([0,1,2,3,4,5,6,7,8,18,19,20,21,22,23].indexOf(now.getHours()) != -1) {
-		template = ich.notWorking;
-	} else if (([12,13].indexOf(now.getHours()) != -1) && (now.getDay() == 4)) {
-		template = ich.market;
-	} else if ([9,10].indexOf(now.getHours()) != -1) {
-		template = ich.tooEarly;
-	} else {
-		template = ich.yes;
-	}
-
-	var r = document.getElementById("response");
-	r.innerHTML = template();
+    chooser();
+    setInterval(chooser, 30000);
 });
 
 </script>
