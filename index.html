@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Does Pete Have A Meeting?</title>
+
+<style type="text/css">
+
+#response {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 120px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 200px;
+}
+
+#response p {
+  margin: 10px;
+  text-transform: uppercase;
+}
+
+#response small {
+  font-size: 24px;
+}
+
+#share {
+  text-align: center;
+  margin-top: 100px;
+}
+
+</style>
+
+<script type="text/javascript" src="ich.js"></script>
+<script type="text/javascript">
+
+// github.com/ded/domready
+!function(a,b){typeof define=="function"?define(b):typeof module!="undefined"?module.exports=b():this[a]=this.domReady=b()}("domready",function(a){function l(a){k=1;while(a=b.shift())a()}var b=[],c,d=!1,e=document,f=e.documentElement,g=f.doScroll,h="DOMContentLoaded",i="addEventListener",j="onreadystatechange",k=/^loade|c/.test(e.readyState);e[i]&&e[i](h,c=function(){e.removeEventListener(h,c,d),l()},d),g&&e.attachEvent(j,c=function(){/^c/.test(e.readyState)&&(e.detachEvent(j,c),l())});return a=g?function(c){self!=top?k?c():b.push(c):function(){try{f.doScroll("left")}catch(b){return setTimeout(function(){a(c)},50)}c()}()}:function(a){k?a():b.push(a)}});
+
+domReady(function() {
+	var now = new Date(),
+	    template;
+
+	if ([5,6].indexOf(now.getDay()) != -1) {
+		template = ich.weekend;
+	} else if ([0,1,2,3,4,5,6,7,8,18,19,20,21,22,23].indexOf(now.getHours()) != -1) {
+		template = ich.notWorking;
+	} else if (([12,13].indexOf(now.getHours()) != -1) && (now.getDay() == 4)) {
+		template = ich.market;
+	} else if ([9,10].indexOf(now.getHours()) != -1) {
+		template = ich.tooEarly;
+	} else {
+		template = ich.yes;
+	}
+
+	var r = document.getElementById("response");
+	r.innerHTML = template();
+});
+
+</script>
+
+</head>
+
+<body>
+
+<div id='response'></div>
+<div id='share'>
+
+	<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://doespetehaveameeting.com" data-text="Does @petermacrobert have a meeting?" data-related="petermacrobert,jalada">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</div>
+
+<script id='yes' type='text/html'>
+	<p>YES</p>
+</script>
+
+<script id='weekend' type='text/html'>
+	<p>NO</p>
+	<small>It's the weekend!</small>
+</script>
+
+<script id='notWorking' type='text/html'>
+	<p>UNLIKELY</p>
+	<small>It's not office hours</small>
+</script>
+
+<script id='tooEarly' type='text/html'>
+	<p>DOUBTFUL</p>
+	<small>It's a bit early for Pete</small>
+</script>
+
+<script id='market' type='text/html'>
+	<p>HOPEFULLY NOT</p>
+	<small>If he does, he's missing the Food Market!</small>
+</script>
+
+</body>
+</html>
