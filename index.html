@@ -38,11 +38,11 @@ var chooser = function() {
       template,
       r = document.getElementById("response");
 
-  if ([5,6].indexOf(now.getDay()) != -1) {
+  if ([6,0].indexOf(now.getDay()) != -1) {
     template = ich.weekend;
   } else if ([0,1,2,3,4,5,6,7,8,17,18,19,20,21,22,23].indexOf(now.getHours()) != -1) {
     template = ich.notWorking;
-  } else if (([12,13].indexOf(now.getHours()) != -1) && (now.getDay() == 4)) {
+  } else if (([12,13].indexOf(now.getHours()) != -1) && (now.getDay() == 5)) {
     template = ich.market;
   } else if ([9,10].indexOf(now.getHours()) != -1) {
     template = ich.tooEarly;
